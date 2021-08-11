@@ -24,7 +24,7 @@ def battery():
 	for x in range(i):
 		i -= 1
 		battery_status = i
-		time.sleep(0.1)
+		time.sleep(10)
 
 		if battery_status == 0:
 			print("\nbattery empty")

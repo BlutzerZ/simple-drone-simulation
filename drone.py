@@ -9,7 +9,7 @@ Made by: BlutzerZ
 
 Features:
 	- Using Thread to simulate battery
-	- Simulation loc of drone with simple (X, Z)
+	- Simulation loc of drone with simple (X, Y)
 
 
 GITHUB: https://github.com/BlutzerZ/simple-drone-simulation/
@@ -40,48 +40,35 @@ def command(command):
 	global fly
 	global batt
 
-	if str(command) == "fly":
-		if fly == False:
-			fly = True
-			batt = Thread(target = battery)
-			batt.start()
-			print('\n[>] flying your drone..')
-			time.sleep(2)
-			print('[>] Your drone now fly')
-			time.sleep(1)
-			print('[>] Now you can control with entering command')
-			print('[>] Command to move [forward/backward/left/right]')
-			time.sleep(1)
-			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-			return
-		else:
+	if fly == True:
+		if str(command) == "fly":
 			print('\n[!] Your Drone already fly')
 			time.sleep(1)
 			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 			return
 
-	elif str(command) == "battery":
-		if fly == True:
-			print("\n[>] Remaining battery = "+ str(battery_status) +"%")
-			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-			return
-		else:
-			print("\n[>] Remaining battery = 100%")
+		elif str(command) == "battery":
+			if fly == True:
+				print("\n[>] Remaining battery = "+ str(battery_status) +"%")
+				print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+				return
+			else:
+				print("\n[>] Remaining battery = 100%")
+				print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+				return
+
+		elif str(command) == "help":
+			print("\n==[HELP]==")
+			print("'fly' | to fly your drone")
+			print("'forward' | to fly your drone forward")
+			print("'backward' | to fly your drone backward")
+			print("'left' | to fly your drone left")
+			print("'right' | to fly your drone rigt")
+			print("'battery' | to check your battery percentage")
 			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 			return
 
-	elif str(command) == "help":
-		print("\n==[HELP]==")
-		print("'fly' | to fly your drone")
-		print("'forward' | to fly your drone forward")
-		print("'backward' | to fly your drone backward")
-		print("'left' | to fly your drone left")
-		print("'right' | to fly your drone rigt")
-		print("'battery' | to check your battery percentage")
-		print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-		return
-
-	elif fly == True:
+		#   --------- CONTROL ---------
 		if str(command) == "left":
 			print("\n[>] Turning left...")
 			time.sleep(1)
@@ -118,12 +105,26 @@ def command(command):
 			print("\n[!] Wrong command, Please re-entering command")
 			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 			return
-
 	else:
-		print("\n[!] Wrong command or your drone aren't fly")
-		print("[!] Please re-entering command or fly your drone")
-		print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-		return
+		if str(command) == "fly":
+			fly = True
+			batt = Thread(target = battery)
+			batt.start()
+			print('\n[>] flying your drone..')
+			time.sleep(2)
+			print('[>] Your drone now fly')
+			time.sleep(1)
+			print('[>] Now you can control with entering command')
+			print('[>] Command to move [forward/backward/left/right]')
+			time.sleep(1)
+			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+			return
+
+		else:
+			print("\n[!] Wrong command or your drone aren't fly")
+			print("[!] Please re-entering command or fly your drone")
+			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+			return
 
 def main():
 	global x

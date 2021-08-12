@@ -39,8 +39,19 @@ def command(command):
 	global y
 	global fly
 	global batt
-
-	if fly == True:
+	
+	if str(command) == "help":
+		print("\n==[HELP]==")
+		print("'fly' | to fly your drone")
+		print("'forward' | to fly your drone forward")
+		print("'backward' | to fly your drone backward")
+		print("'left' | to fly your drone left")
+		print("'right' | to fly your drone rigt")
+		print("'battery' | to check your battery percentage")
+		print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+		return
+	
+	elif fly == True:
 		if str(command) == "fly":
 			print('\n[!] Your Drone already fly')
 			time.sleep(1)
@@ -56,17 +67,6 @@ def command(command):
 				print("\n[>] Remaining battery = 100%")
 				print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 				return
-
-		elif str(command) == "help":
-			print("\n==[HELP]==")
-			print("'fly' | to fly your drone")
-			print("'forward' | to fly your drone forward")
-			print("'backward' | to fly your drone backward")
-			print("'left' | to fly your drone left")
-			print("'right' | to fly your drone rigt")
-			print("'battery' | to check your battery percentage")
-			print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-			return
 
 		#   --------- CONTROL ---------
 		if str(command) == "left":
